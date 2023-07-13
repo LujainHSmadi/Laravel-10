@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Throw_;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ListingController extends Controller
 {
@@ -12,7 +14,8 @@ class ListingController extends Controller
      */
     public function index()
     {
-        //
+        $listings = Listing::get();
+        return view('listings', compact($listings))
     }
 
     /**
@@ -34,9 +37,15 @@ class ListingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Listing $listing)
+    public function show($id)
     {
-        //
+        $listing = Listing::find($id);
+        if($listing){
+            return view('listing', compact($listing));
+        }
+        else{
+            return redirect()->back();
+        }
     }
 
     /**

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         Listing::factory(5)->create();
         // Listing::create([
         //     'title'=>'Laravel Senior Developer',
-        //     'tag'=>'Laravel, Java Script',
+        //     'tag'=>'Laravel,Java Script',
         //     'company'=>'ACME Corp',
         //     'location'=>'Boston, MA',
         //     'email'=>'email@email.com',
