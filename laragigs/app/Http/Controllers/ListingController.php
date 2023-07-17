@@ -14,8 +14,8 @@ class ListingController extends Controller
      */
     public function index()
     {
-        $listings = Listing::get();
-        return view('listings', compact($listings))
+        $listings = Listing::latest()->filter(request(['tag']))->get();
+        return view('listings.index', compact('listings'));
     }
 
     /**
@@ -41,7 +41,7 @@ class ListingController extends Controller
     {
         $listing = Listing::find($id);
         if($listing){
-            return view('listing', compact($listing));
+            return view('listings.show', compact('listing'));
         }
         else{
             return redirect()->back();

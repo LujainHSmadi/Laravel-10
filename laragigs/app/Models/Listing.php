@@ -18,4 +18,14 @@ class Listing extends Model
         'description'
 
     ];
+
+    //scopeFilter=> scope is a reserved word it means you can use filter without scope word to call this function
+    public function scopeFilter($query, array $filters){
+        if($filters['tag']??false)//if it is not false then move on
+        {
+            $query->where('tags', 'like','%'.request('tag').'%')->get();
+
+
+        }
+    }
 }
