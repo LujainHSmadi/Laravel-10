@@ -11,12 +11,17 @@ class Listing extends Model
     protected $fillable=[
         'title',
         'company',
-        'tag',
+        'tags',
         'location',
         'website',
         'email',
-        'description'
+        'description',
+        'logo'
 
+    ];
+
+    protected $casts = [
+        'tags' => 'array'
     ];
 
     //scopeFilter=> scope is a reserved word it means you can use filter without scope word to call this function
@@ -25,7 +30,12 @@ class Listing extends Model
         {
             $query->where('tags', 'like','%'.request('tag').'%')->get();
 
-
+        }
+        if($filters['search']??false){
+            $query->where('title','like','%'.request('search').'%')
+            ->orWhere('description','like','%'.request('search').'%')
+            ->orWhere('tags', 'like','%'.request('search').'%')
+            ->get();
         }
     }
 }
